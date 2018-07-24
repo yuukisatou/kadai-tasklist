@@ -9,6 +9,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+
+<!-- flash_messagesを全てのviewで表示できるようにする -->
+<%= render "layouts/flash_messages" %>
+
+
+<%= yield %>
+    
+    </div>
   </body>
 </html>
