@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
+  
+  #before action で省略と共通化
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  
   def index
     @tasks = Task.all  #Taskモデル一覧取得
   end
   
   def show
-    @task = Task.find(params[:id])  #id指定で１つだけ取得、@task単数形
   end
   
   def new
@@ -24,12 +27,9 @@ class TasksController < ApplicationController
   end
   
   def edit
-    @task = Task.find(params[:id])  #params[:id]で検索
   end
   
   def update  #createとほぼ同じ
-    @task = Task.find(params[:id])
-    
     if @task.update(task_params)
       flash[:success] = "タスクが正常に更新されました"
       redirect_to @task  #tasks/show.html.erb を表示
@@ -40,7 +40,6 @@ class TasksController < ApplicationController
   end
   
   def destroy  #削除アクション
-    @task = Task.find(params[:id])
     @task.destroy
     
     flash[:success] = "タスクは正常に削除されました"
@@ -50,8 +49,11 @@ class TasksController < ApplicationController
   
   private
   
-  #Strong Parameter
-  def task_params
+  def set_task    #id検索を共通化
+    @task = Task.find(params[:id])
+  end
+  
+  def task_params   #Strong Parameter
     params.require(:task).permit(:content)
   end
 
