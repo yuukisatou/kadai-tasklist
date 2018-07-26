@@ -16,9 +16,10 @@
   <!--↑バリデーションチェック-->
 
 
+<%= f.label :status, "ステータス" %>
+<%= f.select :status, ["未実施", "着手中", "完了済"], :include_blank => true  %>
 
 <%= f.label :content, "内容" %>
-
 <%= f.text_field :content %>
 
 
