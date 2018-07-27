@@ -25,8 +25,8 @@
 
   <div class="form-group">
 <%= f.label :status, "ステータス" %>
-<%= f.select :status, ["未実施", "着手中", "完了済"], :include_blank => true, class: "form-control"  %>
-  </div>
+<%= f.select :status, ["未実施", "着手中", "完了済"], { :include_blank => true }, class: "form-control"  %>
+  </div>    <!-- selectメソッドの場合は、HTMLオプションは第4引数 -->
   
   <div class="form-group">
 <%= f.label :content, "内容" %>
