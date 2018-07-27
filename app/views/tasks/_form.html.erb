@@ -1,9 +1,17 @@
-<!-- パーシャル -->
+<!-- パーシャル（フォーム部分） -->
+
+<div class="row">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+    <!-- フォーム横幅表示領域
+      ・767px以下(xs) では、12カラム（最大）で表示
+      ・768px (sm) 以上では、 offset として2カラム追加して、8カラムで表示
+      ・ただし1200px以上 (lg) の場合は、offset として3カラム追加して、6カラム（半分）で表示 -->
+
 <%= form_for(task) do |f| %>
 
   <!--↓バリデーションチェック-->
 <% if task.errors.any? %>
-  <div id="error_explanation">
+  <div class="alert alert-warning">
     <ul>
 <% task.errors.full_messages.each do |task| %>
       <li>
@@ -15,14 +23,20 @@
 <% end %>
   <!--↑バリデーションチェック-->
 
-
+  <div class="form-group">
 <%= f.label :status, "ステータス" %>
 <%= f.select :status, ["未実施", "着手中", "完了済"], :include_blank => true  %>
-
+  </div>
+  
+  <div class="form-group">
 <%= f.label :content, "内容" %>
 <%= f.text_field :content %>
+  </div>
 
 
-<%= f.submit "作成" %>
+<%= f.submit "作成", class: "btn btn-primary" %>
 
 <% end %>
+
+  </div>
+</div>

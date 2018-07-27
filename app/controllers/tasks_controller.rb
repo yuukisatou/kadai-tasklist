@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @tasks = Task.all  #Taskモデル一覧取得
+    @tasks = Task.all.page(params[:page])  #Taskモデル一覧取得
   end
   
   def show
