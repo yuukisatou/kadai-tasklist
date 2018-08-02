@@ -1,4 +1,7 @@
 class Task < ApplicationRecord
+  
+  belongs_to :user # UserとTaskの一対多
+  
   validates :content, presence: true, length: { maximum: 255 }
   #バリデーションチェック content
   #・空っぽでないか

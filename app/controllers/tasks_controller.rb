@@ -4,7 +4,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @tasks = Task.all.page(params[:page])  #Taskモデル一覧取得
+    if logged_in?
+      @user = current_user
+      @task = current_user.tasks.build #form_for用
+      @tasks = current_user.tasks.all.page(params[:page])
+    end
   end
   
   def show
@@ -15,7 +19,7 @@ class TasksController < ApplicationController
   end
   
   def create
-    @task = Task.new(task_params)  #new → create処理、Strong Parameter使用
+    @task = current_user.tasks.build(task_params)  #new → create処理、Strong Parameter使用
     
     if @task.save
       flash[:success] = "タスクが正常に作成されました"
@@ -52,7 +56,7 @@ class TasksController < ApplicationController
   def set_task    #id検索を共通化
     @task = Task.find(params[:id])
   end
-  
+
   def task_params   #Strong Parameter
     params.require(:task).permit(:content, :status)
   end

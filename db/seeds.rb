@@ -7,7 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# テストデータ100件作成
-(1..100).each do |n|
-  Task.create(status: "未実施", content: "タスク " + n.to_s)
-end
+
