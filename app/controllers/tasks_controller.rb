@@ -2,8 +2,8 @@ class TasksController < ApplicationController
   
   #before action で省略と共通化
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :require_user_logged_in, only: [:create, :update, :destroy]
-  before_action :correct_user, only: [:show, :create, :update, :destroy]
+  before_action :require_user_logged_in, except: :index
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
   
   def index
     if logged_in?
